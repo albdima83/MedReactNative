@@ -1,0 +1,9 @@
+## How to compile
+1. check version of node `node -v` and it should be 16
+2. launch `yarn install`
+
+### How to start react-native
+npx react-native start
+
+### How to start react native on Android
+npx react-native run-android

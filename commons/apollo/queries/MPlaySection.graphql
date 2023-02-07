@@ -1,0 +1,7 @@
+#import "./MPlayFragments.graphql"
+
+query MPlaySection($id: ID!,$resolverType: String,$resolverParams: [KeyValueInput!],$first:Int) {
+  getSection(id: $id,resolverType: $resolverType,resolverParams: $resolverParams) {
+      ... SectionFragment
+  }
+}

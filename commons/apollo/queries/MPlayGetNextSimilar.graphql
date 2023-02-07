@@ -1,0 +1,12 @@
+#import "./MPlayFragments.graphql"
+
+query MPlayGetNextSimilar($id: ID!,$resolverParams: [KeyValueInput!]!) {
+  getNextSimilar(id: $id,resolverParams: $resolverParams){
+    guid
+    callSign
+    analyticsContext {
+      contentId
+      trackId
+    }
+  }
+}

@@ -1,0 +1,24 @@
+#import "./MPlayFragments.graphql"
+
+query MPlayUserCollection($id: ID!,$resolverType: String,$resolverParams: [KeyValueInput!],$tvodGuids:[String!],$first:Int) {
+  getUserlistCollection(id: $id,resolverType: $resolverType,resolverParams:$resolverParams,tvodGuids:$tvodGuids){
+   ...CollectionFragment
+      ... on PlaceholderCollection{
+        id
+        resolverParams {
+          key,
+          value,
+          __typename
+        }
+        resolverType
+      }
+      ... on OnAirCollection {
+              stationFiltersV2 {
+                label
+              }
+      }
+      ... on VideoCollection{
+        description
+      }
+ }
+}

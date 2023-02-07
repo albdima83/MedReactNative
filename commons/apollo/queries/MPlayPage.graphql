@@ -1,0 +1,20 @@
+#import "./MPlayFragments.graphql"
+
+query MPlayPage($id:ID!,$first:Int) {
+  getPage(id:$id) {
+    id
+    type
+    lastModified
+    option
+    requiredChannelRight
+    advContext {
+      ...AdvContextFragment
+    }
+    landingSectionInterfacesConnection{
+      ... LandingSectionsConnectionFragment
+    }
+    sectionInterfacesConnection {
+      ... SectionInterfacesConnectionFragment
+    }
+  }
+}

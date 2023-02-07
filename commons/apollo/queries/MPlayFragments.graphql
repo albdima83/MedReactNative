@@ -1,0 +1,417 @@
+fragment AnalyticsContextFragment on AnalyticsContext{
+  advSiteSection
+  contentId
+  brand
+}
+
+fragment AdvContextFragment on AdvContext{
+  adUnit
+  advSiteSection
+  fwCallSignSuffix
+}
+
+fragment LinkFragment on Link {
+    value
+    type
+    target
+    referenceId
+    referenceType
+    behavior
+}
+
+fragment CollectionAttributesFragment on CollectionAttributes {
+    layout
+    flags
+    interval
+    timeSlideshow
+    variant
+    template
+    refreshInterval
+}
+
+fragment VisualLinkFragment on VisualLink{
+    value
+    type
+    target
+    label
+    referenceId
+    referenceType
+    behavior
+}
+
+fragment ImageFragment on ImagePlaceholder{
+    agency
+    id
+    engine
+    type
+    r
+    imagePreview
+}
+
+fragment CardAttributesFragment on CardAttributes{
+  textColor
+}
+
+fragment AdditionalLabelFragment on Label{
+  bgColor,
+  type,
+  title
+}
+
+fragment ItemFragment on Item{
+  __typename
+  cardImages{
+    ...ImageFragment
+  }
+  cardAttributes {
+    ...CardAttributesFragment
+  }
+  cardCtas {
+    ...VisualLinkFragment
+  }
+  cardEyelet
+  cardLink{
+    ...LinkFragment
+  }
+  cardTitle
+  cardText
+  id
+  ... on GenericItem{
+    additionalLabel {
+      ...AdditionalLabelFragment
+    }
+  }
+  ... on LandingItem{
+    id
+    cardText
+  }
+  ... on PlaceholderItem{
+    id
+    resolverType
+  }
+  ... on VideoItem{
+    editorialType
+    seasonTitle
+    additionalLabel {
+      ...AdditionalLabelFragment
+    }
+  }
+  ... on SeasonItem{
+    additionalLabel {
+      ...AdditionalLabelFragment
+    }
+  }
+  ... on SeriesItem{
+    additionalLabel {
+      ...AdditionalLabelFragment
+    }
+  }
+  ... on StationItem{
+    additionalLabel {
+      ...AdditionalLabelFragment
+    }
+    cardAttributes{
+      bgGradient {
+        angle
+        endColor
+        startColor
+      }
+    }
+    cardText
+    listings {
+      startTime,
+      endTime,
+      guid,
+      restartAllowed,
+      liveAllowed,
+      title,
+      description
+    }
+  }
+}
+
+fragment ItemFragmentWithText on Item{
+    ...ItemFragment
+    cardText
+}
+
+fragment CollectionFragment on Collection{
+  __typename
+  attributes {
+    ...CollectionAttributesFragment
+  }
+  ctas{
+    ...VisualLinkFragment
+  }
+  id
+  images{
+    ...ImageFragment
+  }
+  itemsConnection(first:$first){
+    pageInfo{
+        ... PageInfoFragment
+    }
+    items{
+      ...ItemFragment
+    }
+  }
+  title
+}
+
+fragment SeasonItemFragment on SeasonItem{
+  seasonTitle
+  seasonNumber
+  seriesGuid
+  cardLink {
+     ...LinkFragment
+  }
+}
+
+fragment DetailItemFragment on Item{
+  __typename
+  cardTitle
+  cardText
+  cardImages{
+    ...ImageFragment
+  }
+  cardAttributes {
+    ...CardAttributesFragment
+  }
+  cardCtas {
+    ...VisualLinkFragment
+  }
+  cardLink {
+    ...LinkFragment
+  }
+  ... on SeriesItem{
+    genres,
+    primaryGenre,
+    rating,
+    editorialMetadata,
+    year,
+    serviceId,
+    selectedSeason {
+      seasonTitle
+      title
+      description
+      genres
+      rating
+      primaryGenre
+      expirationDate
+      actors
+      directors
+      audioLanguages
+      conductors
+      subLanguages
+      editorialMetadata
+      cardEditorialMetadata
+      selectedEpisodeLink {
+        ... VisualLinkFragment
+      }
+      ... ItemFragment
+    }
+    seasons {
+      ... SeasonItemFragment
+    }
+  }
+  ... on VideoItem{
+    duration,
+    expirationDate,
+    year,
+    country,
+    contentRight,
+    primaryGenre,
+    trailer {
+      cardLink {
+        ... LinkFragment
+      }
+    },
+    rating,
+    directors,
+    actors,
+    audioLanguages,
+    subLanguages
+  }
+  
+}
+
+fragment SectionFragment on Section{
+    collections{
+      ...CollectionFragment
+      ... on ScheduleCollection{
+        itemsConnection(first:$first){
+          items{
+            ... ItemFragmentWithText
+          }
+        }
+      }
+      ... on OnAirCollection{
+        itemsConnection(first:$first){
+          items{
+            ... ItemFragmentWithText
+          }
+        }
+      }
+      ... on PlaceholderCollection{
+        id
+        resolverParams {
+          key,
+          value,
+          __typename
+        }
+        resolverType
+      }
+      ... on UserlistCollection{
+        id
+        resolved
+        resolverParams {
+          key,
+          value,
+          __typename
+        }
+        resolverType
+      }
+      ... on VideoCollection {
+        description
+        images{
+          ...ImageFragment
+        }
+      }
+    }
+    __typename
+    id
+    link{
+      ... LinkFragment
+    }
+    title
+}
+
+fragment SectionInterfaceFragment on SectionInterface{
+        __typename
+        id
+        ...SectionFragment
+        ... on PlaceholderSection {
+            id
+            resolverType
+            resolverParams {
+              key
+              value
+              
+              }
+          }
+}
+
+fragment PageInfoFragment on PageInfo{
+  context
+  endCursor
+  hasNextPage
+}
+
+fragment LandingSectionsConnectionFragment on SectionInterfacesConnection{
+      sections {
+        ... SectionInterfaceFragment
+      }
+}
+
+fragment SectionInterfacesConnectionFragment on SectionInterfacesConnection{
+      sections {
+        ... SectionInterfaceFragment
+      }
+      pageInfo{
+        ... PageInfoFragment
+      }
+}
+
+fragment PlaceholderNavItem  on PlaceholderNavItem{
+        id
+        title
+        iconReference
+        disableForNotLogged
+        hideForChannelRights
+        hideForLogged
+        hideForNotLogged
+        showForKids
+        resolverType
+        resolverParams {
+          key
+          value
+        }
+}
+
+fragment NavItemFragment on NavItem{
+        id
+        title
+        iconReference
+        disableForNotLogged
+        hideForChannelRights
+        hideForLogged
+        hideForNotLogged
+        showForKids
+        link {
+          referenceId
+          referenceType
+        }
+}
+
+fragment OptionsFragment on Option{
+  id
+  name
+  landingImageCtv
+  extendedLogo
+  landingCtaLink{
+    ... LinkFragment
+  }
+}
+
+fragment DetailStaticFragment on Item{
+    title
+    __typename
+    ... on QrCodeItem{
+      vanityUrl
+      actionCreateUrl
+    }
+    ... on StaticItem{
+        id
+        cardTitle
+        cardLink {
+          ...LinkFragment
+        }
+        content {
+          __typename
+          ... on HtmlParagraph{
+            title
+            html
+          }
+        }
+    }
+}
+
+fragment DataSourceFragment on Item{
+      id
+      serviceId
+      ... on VideoItem{
+        guid,
+        nextVideo{
+          ... on PlaceholderItem{
+            id
+            resolverType
+            resolverParams {
+              key,
+              value
+            }
+          }
+          ... on VideoItem{
+            callSign
+            guid
+          }
+        }
+      }
+      ... on StationItem{
+        callSign
+        listings{
+            guid
+            liveAllowed
+            restartAllowed
+        }
+      }
+}

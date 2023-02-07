@@ -1,0 +1,17 @@
+#import "./MPlayFragments.graphql"
+
+query MPlayMenu($id: ID!) {
+  getNav(id: $id) {
+    items {
+      # Nav
+      id
+      showForKids
+      showForChannelRights
+      hideForChannelRights
+      items{
+        ... NavItemFragment
+        ... PlaceholderNavItem
+      }
+    }
+  }
+}

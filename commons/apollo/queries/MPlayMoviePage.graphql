@@ -1,0 +1,21 @@
+#import "./MPlayFragments.graphql"
+
+query MPlayMoviePage($id:ID!,$templateName:String,$first:Int) {
+  getMoviePage(id:$id,templateName:$templateName) {
+    id
+    type
+    option
+    analyticsContext {
+      ...AnalyticsContextFragment
+    }
+    advContext {
+      ...AdvContextFragment
+    }
+    dataSource{
+      ...DetailItemFragment
+    }
+    sectionInterfacesConnection {
+      ... SectionInterfacesConnectionFragment
+    }
+  }
+}

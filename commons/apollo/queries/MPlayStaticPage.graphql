@@ -1,0 +1,15 @@
+#import "./MPlayFragments.graphql"
+
+query MPlayStaticPage($id:ID!,$templateName: String) {
+  getStaticPage(id: $id,templateName: $templateName) {
+    id
+    title
+    requiredChannelRight
+    advContext {
+      ...AdvContextFragment
+    }
+    dataSource{
+      ...DetailStaticFragment
+    }
+  }
+}

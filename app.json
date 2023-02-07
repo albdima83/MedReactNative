@@ -1,0 +1,14 @@
+{
+  "name": "MediasetInfinityNew",
+  "displayName": "MediasetInfinityNew",
+  "intentFilters": [
+    {
+      "action": "MAIN",
+      "data":{},
+      "category": [
+        "LEANBACK_LAUNCHER",
+        "LAUNCHER"
+      ]
+    }
+  ]
+}

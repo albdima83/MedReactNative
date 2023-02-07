@@ -1,0 +1,7 @@
+#import "./MPlayFragments.graphql"
+
+query MPlayOptions($id:ID!) {
+  getOptions(id:$id) {
+    ... OptionsFragment
+  }
+}

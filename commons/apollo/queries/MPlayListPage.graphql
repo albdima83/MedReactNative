@@ -1,0 +1,18 @@
+#import "./MPlayFragments.graphql"
+
+query MPlayListPage($id:ID!, $filter: CollectionFilter, $seriesMetadataTemplateName: String, $sort: CollectionSort, $stationMetadataTemplateName: String,$first:Int) {
+  getListingPage(id: $id,filter: $filter,seriesMetadataTemplateName: $seriesMetadataTemplateName,sort: $sort,stationMetadataTemplateName: $stationMetadataTemplateName) {
+    id
+    title
+    requiredChannelRight
+    advContext {
+      ...AdvContextFragment
+    }
+    landingSectionInterfacesConnection{
+      ... LandingSectionsConnectionFragment
+    }
+    sectionInterfacesConnection {
+      ... SectionInterfacesConnectionFragment
+    }
+  }
+}

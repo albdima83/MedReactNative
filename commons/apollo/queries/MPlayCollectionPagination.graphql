@@ -1,0 +1,43 @@
+#import "./MPlayFragments.graphql"
+
+query MPlayLoadMoreCollection($id: ID!,$context: String,$first:Int,$end:String) {
+  getCollection(id: $id,context: $context) {
+      ... on PlaceholderCollection{
+        id
+        resolverParams {
+          key,
+          value,
+          __typename
+        }
+        resolverType
+      }
+      ... on OnAirCollection {
+              stationFiltersV2 {
+                label
+              }
+      }
+      ... on VideoCollection{
+        description
+     }
+    attributes {
+        ...CollectionAttributesFragment
+     }
+     ctas{
+        ...VisualLinkFragment
+     }
+     id
+     images{
+       ...ImageFragment
+     }
+    itemsConnection(first: $first, after: $end){
+        pageInfo{
+            ... PageInfoFragment
+        }
+        items{
+          ...ItemFragment
+        }
+     }
+     title
+     __typename
+  }
+}

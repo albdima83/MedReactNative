@@ -1,0 +1,24 @@
+#import "./MPlayFragments.graphql"
+
+query MPlayCollection($id: ID!,$resolverType: String,$resolverParams: [KeyValueInput!],$context: String,$first:Int) {
+  getCollection(id: $id,resolverType: $resolverType,resolverParams: $resolverParams,context: $context) {
+      ...CollectionFragment
+      ... on PlaceholderCollection{
+        id
+        resolverParams {
+          key,
+          value,
+          __typename
+        }
+        resolverType
+      }
+      ... on OnAirCollection {
+              stationFiltersV2 {
+                label
+              }
+      }
+      ... on VideoCollection{
+        description
+      }
+  }
+}

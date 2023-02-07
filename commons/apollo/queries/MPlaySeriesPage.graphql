@@ -1,0 +1,18 @@
+#import "./MPlayFragments.graphql"
+
+query MPlaySeriesPage($id:ID!,$templateName:String,$metadataTemplateName:String,$first:Int) {
+  getSeriesPage(id:$id,templateName:$templateName,metadataTemplateName:$metadataTemplateName) {
+    id
+    type
+    option
+    advContext {
+      ...AdvContextFragment
+    }
+    dataSource{
+      ...DetailItemFragment
+    }
+    sectionInterfacesConnection {
+      ... SectionInterfacesConnectionFragment
+    }
+  }
+}

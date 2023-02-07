@@ -1,0 +1,14 @@
+## GENERATE APOLLO CODEGEN
+1. Move to root project > commons > apollo and download schema
+`apollo service:download --endpoint=https://api-graph-preprod.rti-lab.io graphql-schema.json`
+
+2. Move to root project and launch this command:
+`apollo codegen:generate ./src/apollo/generated --includes='./commons/apollo/queries/*.graphql' --operationIdsPath=operationIdsPath --localSchemaFile="./commons/apollo/graphql-schema.json" --target=typescript --tagName=gql --outputFlat`
+
+`apollo codegen:generate ./src/apollo/generated --queries='./commons/apollo/queries/*.graphql' --operationIdsPath=operationIdsPath --localSchemaFile="./commons/apollo/graphql-schema.json" --target=typescript --tagName=gql --outputFlat`
+
+`apollo codegen:generate src/types/api.d.ts --localSchemaFile="./commons/apollo/graphql-schema.json" --includes='./src/apollo/generated/*.ts' --target=typescript --outputFlat`
+
+`apollo codegen:generate --localSchemaFile="./commons/apollo/graphql-schema.json" --target=typescript --includes="src/apollo/generated/*.ts" --tagName=gql --addTypename --globalTypesFile="src/apollo/generated/globalTypes.ts" types`
+
+`apollo codegen:generate --localSchemaFile="./commons/apollo/graphql-schema.json" --target=typescript --includes="./commons/apollo/queries/*.graphql" --queries="./commons/apollo/queries.ts" --tagName=gql --addTypename --globalTypesFile="./src/apollo/types/graphql-global-types.ts" types`

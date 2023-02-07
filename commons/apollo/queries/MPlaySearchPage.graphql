@@ -1,0 +1,20 @@
+#import "./MPlayFragments.graphql"
+
+query MPlaySearchPage ($query: String, $channel: String, $uxReference: String!, $property: String,$first:Int) {
+  getSearchPage(query: $query, channel: $channel, uxReference: $uxReference, property: $property) {
+    __typename
+    id
+    type
+    title
+    option
+    advContext {
+      ...AdvContextFragment
+    }
+    analyticsContext {
+      ...AnalyticsContextFragment
+    }
+    sectionInterfacesConnection {
+      ...SectionInterfacesConnectionFragment
+    }
+  }
+}
